@@ -44,8 +44,9 @@ func main() {
 
 	api.GET("/mata-kuliah", middleware.AuthMiddleware(cfg), handlers.HandleGetAllMatkul(pool))
 	api.POST("/mata-kuliah", middleware.AuthMiddleware(cfg), handlers.HandleCreateMatkul(pool))
-	api.PUT("/mata-kuliah/:id", middleware.AuthMiddleware(cfg))
-	api.DELETE("/mata-kuliah/:id", middleware.AuthMiddleware(cfg))
+	api.GET("/mata-kuliah/:id", middleware.AuthMiddleware(cfg), handlers.HandleGetMatkulByID(pool))
+	api.PUT("/mata-kuliah/:id", middleware.AuthMiddleware(cfg), handlers.HandleUpdateMatkul(pool))
+	api.DELETE("/mata-kuliah/:id", middleware.AuthMiddleware(cfg), handlers.HandleDeleteMatkul(pool))
 
 	log.Println("Server running on port: 8000")
 	router.Run(":" + cfg.Port)
