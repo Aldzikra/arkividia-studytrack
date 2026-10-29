@@ -40,17 +40,17 @@ docs(readme): add setup instructions
 
 | Phase | Tanggal | Branch | Fokus | Tag |
 |---|---|---|---|---|
-| 0 | 29–30 Okt | `chore/setup` | Setup & fondasi | `v0.0.1` |
+| 0 | 29–30 Okt | `feature/setup` | Setup & fondasi | `v0.0.1` |
 | 1 | 31 Okt–2 Nov | `feature/auth` | Modul 1 — Autentikasi | `v0.1.0` |
 | 2 | 3–4 Nov | `feature/mata-kuliah` | Modul 2 — Mata Kuliah | `v0.2.0` |
 | 3 | 5–7 Nov | `feature/tugas` | Modul 3 & 4 — Tugas + Daftar Tugas | `v0.3.0` |
 | 4 | 8–10 Nov | `feature/deadline-reminder` | **Fitur inti — Reminder Deadline** | `v1.0.0` |
-| 5 | 11–13 Nov | `chore/deploy` | Bonus — CI, Deploy, AI | `v1.1.0` |
-| 6 | 13–15 Nov | `docs/final` | Dokumentasi, slide, video, submit | `v1.1.1` |
+| 5 | 11–13 Nov | `feature/deploy` | Bonus — CI, Deploy, AI | `v1.1.0` |
+| 6 | 13–15 Nov | `feature/docs` | Dokumentasi, slide, video, submit | `v1.1.1` |
 
 ---
 
-## Phase 0 — `chore/setup` (29–30 Okt)
+## Phase 0 — `feature/setup` (29–30 Okt)
 
 Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 
@@ -142,7 +142,7 @@ func CategorizeDeadline(deadline, status, now):
 
 ---
 
-## Phase 5 — `chore/deploy` (11–13 Nov)
+## Phase 5 — `feature/deploy` (11–13 Nov)
 
 - [ ] GitHub Actions: `go test ./...`, `go vet`, `npm run lint`, `npm run build`
 - [ ] Deploy backend + Postgres ke Railway/Render (free tier), env lewat dashboard
@@ -151,7 +151,7 @@ func CategorizeDeadline(deadline, status, now):
 
 ---
 
-## Phase 6 — `docs/final` (13–15 Nov)
+## Phase 6 — `feature/docs` (13–15 Nov)
 
 - [ ] `README.md`: deskripsi, cara menjalankan lokal, env vars, link deploy
 - [ ] `docs/API.md`: daftar endpoint + contoh request/response

@@ -36,11 +36,7 @@ test: ## Jalankan seluruh test
 
 .PHONY: check-db-url
 check-db-url:
-	@if [ -z "$(DATABASE_URL)" ]; then echo "DATABASE_URL belum di-set (cek backend/.env)"; exit 1; fi
-
-.PHONY: migrate-install
-migrate-install: ## Install CLI golang-migrate (driver postgres)
-	go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@$(MIGRATE_VER)
+	@if [ -z "$(DATABASE_URL)" ]; then echo "DATABASE_URL belum di-set (cek .env)"; exit 1; fi
 
 .PHONY: migrate-create
 migrate-create: ## Buat file migration baru: make migrate-create name=create_tugas_table

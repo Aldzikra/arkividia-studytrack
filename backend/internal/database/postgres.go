@@ -36,6 +36,6 @@ func Connect(DatabaseUrl string) (*pgxpool.Pool, error) {
 		return nil, err
 	}
 
-	log.Panicln("Successfully connected to PostgreSQL database")
+	log.Println("Successfully connected to PostgreSQL database")
 	return pool, nil
 }
