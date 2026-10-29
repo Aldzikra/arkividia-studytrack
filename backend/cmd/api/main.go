@@ -38,7 +38,7 @@ func main() {
 	})
 
 	router.POST("/auth/register", handlers.HandleCreateUser(pool))
-	router.POST("/auth/login")
+	router.POST("/auth/login", handlers.HandleLogin(pool, cfg))
 
 	log.Println("Server running on port: 8000")
 	router.Run(":" + cfg.Port)
