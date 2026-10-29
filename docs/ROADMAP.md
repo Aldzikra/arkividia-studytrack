@@ -7,7 +7,7 @@ Rencana pengerjaan studi kasus **[StudyTrack] Reminder Tugas Mendekati Deadline*
 - **Wajib:** slide deck (PDF) + video. **Bonus:** kode yang benar-benar jalan, fitur AI, deployment, git history yang rapi.
 
 > Kalau waktu mepet: Phase 1–3 bisa dilewati dengan memakai starter kit resmi
-> (`github.com/ZulfaNurhuda/StudyTrack`), lalu langsung ke Phase 4. Slide + video (Phase 6) tidak boleh dikorbankan.
+> (`github.com/ZulfaNurhuda/StudyTrack`), lalu langsung ke Phase 4. Slide + video (Phase 9) tidak boleh dikorbankan.
 
 ---
 
@@ -16,7 +16,7 @@ Rencana pengerjaan studi kasus **[StudyTrack] Reminder Tugas Mendekati Deadline*
 **Satu phase = satu branch.** Semua pekerjaan phase itu di-commit di branch tersebut, lalu digabung ke `main` lewat Pull Request di akhir phase.
 
 ```
-main ── phase-0 ── phase-1 ── phase-2 ── ... ── phase-6
+main ── phase-0 ── phase-1 ── phase-2 ── ... ── phase-9
          (tiap merge diberi tag)
 ```
 
@@ -40,17 +40,23 @@ docs(readme): add setup instructions
 
 | Phase | Tanggal | Branch | Fokus | Tag |
 |---|---|---|---|---|
-| 0 | 29–30 Okt | `feature/setup` | Setup & fondasi | `v0.0.1` |
-| 1 | 31 Okt–2 Nov | `feature/auth` | Modul 1 — Autentikasi | `v0.1.0` |
-| 2 | 3–4 Nov | `feature/mata-kuliah` | Modul 2 — Mata Kuliah | `v0.2.0` |
-| 3 | 5–7 Nov | `feature/tugas` | Modul 3 & 4 — Tugas + Daftar Tugas | `v0.3.0` |
-| 4 | 8–10 Nov | `feature/deadline-reminder` | **Fitur inti — Reminder Deadline** | `v1.0.0` |
-| 5 | 11–13 Nov | `feature/deploy` | Bonus — CI, Deploy, AI | `v1.1.0` |
-| 6 | 13–15 Nov | `feature/docs` | Dokumentasi, slide, video, submit | `v1.1.1` |
+| **Backend** | | | | |
+| 0 | 29–30 Okt | `chore/setup` | Setup & fondasi | `v0.0.1` |
+| 1 | 31 Okt–1 Nov | `feature/be-auth` | Modul 1 — Autentikasi | `v0.1.0` |
+| 2 | 2 Nov | `feature/be-mata-kuliah` | Modul 2 — Mata Kuliah | `v0.2.0` |
+| 3 | 3–4 Nov | `feature/be-tugas` | Modul 3 & 4 — Tugas + Daftar Tugas | `v0.3.0` |
+| 4 | 5–6 Nov | `feature/be-deadline-reminder` | **Fitur inti — Reminder Deadline** (logika + test) | `v0.4.0` |
+| **Frontend** | | | | |
+| 5 | 7–8 Nov | `feature/fe-setup-auth` | Setup FE + halaman Auth | `v0.5.0` |
+| 6 | 9–10 Nov | `feature/fe-mata-kuliah-tugas` | Halaman Mata Kuliah & Tugas | `v0.6.0` |
+| 7 | 11 Nov | `feature/fe-deadline-reminder` | **Fitur inti — Reminder Deadline** (UI) | `v1.0.0` |
+| **Penutup** | | | | |
+| 8 | 12–13 Nov | `chore/deploy` | Bonus — CI, Deploy, AI | `v1.1.0` |
+| 9 | 14–15 Nov | `docs/final` | Dokumentasi, slide, video, submit | `v1.1.1` |
 
 ---
 
-## Phase 0 — `feature/setup` (29–30 Okt)
+## Phase 0 — `chore/setup` (29–30 Okt)
 
 Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 
@@ -59,35 +65,33 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 - [x] `postgres.go`: `log.Panicln` saat **berhasil** konek bikin crash → ganti `log.Println`; sambungkan config + DB di `main.go`
 - [x] `user.model.go`: import `"uuid"` → `github.com/google/uuid`; tag `UpdatedAt` → `db:"updated_at"`
 - [x] Pasang tool migrasi (`golang-migrate` / `goose`)
-- [ ] Router group `/api`, `GET /api/health`, CORS, format error seragam
+- [x] Router group `/api`, `GET /api/health`, CORS, format error seragam
 - [ ] Frontend: struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar
 
 **Selesai bila:** frontend bisa menampilkan respons `GET /api/health`.
 
 ---
 
-## Phase 1 — `feature/auth` (31 Okt–2 Nov)
+## Phase 1 — `feature/be-auth` (31 Okt–1 Nov)
 
-- [ ] **DB:** migrasi `users` (`id`, `email` unique, `password_hash`, `created_at`, `updated_at`)
-- [ ] **BE:** `POST /api/auth/register` (bcrypt), `POST /api/auth/login` (JWT), `GET /api/auth/me`
-- [ ] **BE:** middleware JWT → simpan `user_id` di context
-- [ ] **FE:** halaman Register & Login, simpan token, protected route, logout
+- [x] **DB:** migrasi `users` (`id`, `email` unique, `password_hash`, `created_at`, `updated_at`)
+- [x] **BE:** `POST /api/auth/register` (bcrypt), `POST /api/auth/login` (JWT), `GET /api/auth/me`
+- [x] **BE:** middleware JWT → simpan `user_id` di context
 
 > Field password jangan pernah ikut di response JSON (`json:"-"`).
 
 ---
 
-## Phase 2 — `feature/mata-kuliah` (3–4 Nov)
+## Phase 2 — `feature/be-mata-kuliah` (2 Nov)
 
 - [ ] **DB:** tabel `mata_kuliah` (`id`, `name`, `kode`, `dosen`, **`user_id` FK**)
 - [ ] **BE:** `GET/POST /api/mata-kuliah`, `PUT/DELETE /api/mata-kuliah/:id` — selalu filter `user_id`
-- [ ] **FE:** halaman daftar + form tambah/edit
 
 > Asumsi: `user_id` ditambahkan agar data tiap mahasiswa terpisah (dibutuhkan untuk F04).
 
 ---
 
-## Phase 3 — `feature/tugas` (5–7 Nov)
+## Phase 3 — `feature/be-tugas` (3–4 Nov)
 
 Hasil phase ini = setara starter kit (baseline sebelum fitur baru).
 
@@ -95,21 +99,18 @@ Hasil phase ini = setara starter kit (baseline sebelum fitur baru).
 - [ ] **DB:** seed 3 contoh tugas dari guidebook (CS 186, CS 61B, CS 169)
 - [ ] **BE:** CRUD `/api/tugas/:id` + `PATCH /api/tugas/:id/status`
 - [ ] **BE:** `GET /api/tugas` — semua tugas user lintas MK, JOIN nama MK, urut `created_at DESC`
-- [ ] **FE:** form tambah/edit tugas (deadline tanggal + jam)
-- [ ] **FE:** halaman daftar — card judul, nama MK, deadline, badge **Belum (kuning)** / **Selesai (hijau)**
 
 > Simpan `deadline` sebagai `TIMESTAMPTZ` (UTC) agar perhitungan "< 24 jam" tidak kacau karena zona waktu; tampilkan dalam WIB di frontend.
 
 ---
 
-## Phase 4 — `feature/deadline-reminder` (8–10 Nov)
+## Phase 4 — `feature/be-deadline-reminder` (5–6 Nov)
 
-Bagian yang dinilai. Kerjakan berurutan DB → BE → FE → test.
+Bagian yang dinilai. Kerjakan berurutan DB → BE → test.
 
 - [ ] **DB:** tidak ada kolom baru — kategori dihitung, bukan disimpan (nilainya berubah seiring waktu). Cukup tambah index pada `deadline` (F01)
 - [ ] **BE:** fungsi murni `CategorizeDeadline(deadline, status, now)` → `"mendekati" | "overdue" | "normal"`; `now` di-inject supaya mudah dites (F01, F03)
 - [ ] **BE:** `GET /api/tugas` menambah field `deadline_category` dan mengurutkan: **mendekati** (deadline terdekat dulu) → **overdue** → **normal** (`created_at DESC`) (F02, F04)
-- [ ] **FE:** card memakai `deadline_category` dari API — mendekati = badge oranye/merah "⏰ < 24 jam"; overdue = badge abu gelap "Terlambat"; normal = tampilan lama (F02, F03)
 - [ ] **Test:** unit test tabel untuk `CategorizeDeadline` + test urutan endpoint
 
 **Logika kategori (pseudocode):**
@@ -138,11 +139,35 @@ func CategorizeDeadline(deadline, status, now):
 | 5 | Mendekati deadline tapi status `selesai` | Tidak ada penanda | Edge case |
 | 6 | Tugas milik user lain | Tidak muncul di daftar | Negatif (F04) |
 
-**Selesai bila:** semua test lulus → merge, tag `v1.0.0`.
+**Selesai bila:** semua test lulus → merge, tag `v0.4.0`.
 
 ---
 
-## Phase 5 — `feature/deploy` (11–13 Nov)
+## Phase 5 — `feature/fe-setup-auth` (7–8 Nov)
+
+- [ ] **FE:** struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar (jika belum selesai di Phase 0)
+- [ ] **FE:** halaman Register & Login, simpan token, protected route, logout
+
+---
+
+## Phase 6 — `feature/fe-mata-kuliah-tugas` (9–10 Nov)
+
+- [ ] **FE:** halaman daftar Mata Kuliah + form tambah/edit
+- [ ] **FE:** form tambah/edit tugas (deadline tanggal + jam)
+- [ ] **FE:** halaman daftar tugas — card judul, nama MK, deadline, badge **Belum (kuning)** / **Selesai (hijau)**
+
+---
+
+## Phase 7 — `feature/fe-deadline-reminder` (11 Nov)
+
+- [ ] **FE:** card memakai `deadline_category` dari API — mendekati = badge oranye/merah "⏰ < 24 jam"; overdue = badge abu gelap "Terlambat"; normal = tampilan lama (F02, F03)
+- [ ] Verifikasi manual skenario di tabel Phase 4
+
+**Selesai bila:** semua skenario terlihat benar di UI → merge, tag `v1.0.0`.
+
+---
+
+## Phase 8 — `chore/deploy` (12–13 Nov)
 
 - [ ] GitHub Actions: `go test ./...`, `go vet`, `npm run lint`, `npm run build`
 - [ ] Deploy backend + Postgres ke Railway/Render (free tier), env lewat dashboard
@@ -151,7 +176,7 @@ func CategorizeDeadline(deadline, status, now):
 
 ---
 
-## Phase 6 — `feature/docs` (13–15 Nov)
+## Phase 9 — `docs/final` (14–15 Nov)
 
 - [ ] `README.md`: deskripsi, cara menjalankan lokal, env vars, link deploy
 - [ ] `docs/API.md`: daftar endpoint + contoh request/response
@@ -164,8 +189,8 @@ func CategorizeDeadline(deadline, status, now):
 ## Checklist Akhir
 
 - [ ] `.env` tidak ada di git history
-- [ ] 7 branch phase sudah di-merge lewat PR dan dihapus
+- [ ] 10 branch phase sudah di-merge lewat PR dan dihapus
 - [ ] Tag `v0.0.1` … `v1.1.1` ada di `main`
-- [ ] Test Phase 4 lulus
+- [ ] Test Phase 4 (BE) lulus
 - [ ] App bisa diakses lewat URL publik
 - [ ] Slide sudah diekspor PDF, video ≥ 480p dengan audio jelas

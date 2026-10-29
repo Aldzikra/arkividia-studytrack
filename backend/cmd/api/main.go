@@ -29,7 +29,8 @@ func main() {
 	defer pool.Close()
 
 	var router *gin.Engine = gin.Default()
-	router.GET("/", func(ctx *gin.Context) {
+	api := router.Group("/api")
+	api.GET("/health", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"message":  "API is running!",
 			"status":   "success",
@@ -37,8 +38,8 @@ func main() {
 		})
 	})
 
-	router.POST("/auth/register", handlers.HandleCreateUser(pool))
-	router.POST("/auth/login", handlers.HandleLogin(pool, cfg))
+	api.POST("/auth/register", handlers.HandleCreateUser(pool))
+	api.POST("/auth/login", handlers.HandleLogin(pool, cfg))
 
 	log.Println("Server running on port: 8000")
 	router.Run(":" + cfg.Port)
