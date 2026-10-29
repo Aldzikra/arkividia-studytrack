@@ -58,7 +58,7 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 - [x] `config.go`: `os.Getenv("")` → `DATABASE_URL`, `PORT`, `JWT_SECRET`
 - [x] `postgres.go`: `log.Panicln` saat **berhasil** konek bikin crash → ganti `log.Println`; sambungkan config + DB di `main.go`
 - [x] `user.model.go`: import `"uuid"` → `github.com/google/uuid`; tag `UpdatedAt` → `db:"updated_at"`
-- [ ] Pasang tool migrasi (`golang-migrate` / `goose`)
+- [x] Pasang tool migrasi (`golang-migrate` / `goose`)
 - [ ] Router group `/api`, `GET /api/health`, CORS, format error seragam
 - [ ] Frontend: struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar
 
