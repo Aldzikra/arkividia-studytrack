@@ -66,7 +66,7 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 - [x] `user.model.go`: import `"uuid"` → `github.com/google/uuid`; tag `UpdatedAt` → `db:"updated_at"`
 - [x] Pasang tool migrasi (`golang-migrate` / `goose`)
 - [x] Router group `/api`, `GET /api/health`, CORS, format error seragam
-- [ ] Frontend: struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar
+- [x] Frontend: struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar
 
 **Selesai bila:** frontend bisa menampilkan respons `GET /api/health`.
 
