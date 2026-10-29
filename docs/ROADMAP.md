@@ -84,7 +84,7 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 
 ## Phase 2 — `feature/be-mata-kuliah` (2 Nov)
 
-- [ ] **DB:** tabel `mata_kuliah` (`id`, `name`, `kode`, `dosen`, **`user_id` FK**)
+- [x] **DB:** tabel `mata_kuliah` (`id`, `name`, `kode`, `dosen`, **`user_id` FK**)
 - [ ] **BE:** `GET/POST /api/mata-kuliah`, `PUT/DELETE /api/mata-kuliah/:id` — selalu filter `user_id`
 
 > Asumsi: `user_id` ditambahkan agar data tiap mahasiswa terpisah (dibutuhkan untuk F04).
@@ -95,7 +95,7 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 
 Hasil phase ini = setara starter kit (baseline sebelum fitur baru).
 
-- [ ] **DB:** tabel `tugas` (`id`, `judul`, `deskripsi`, `deadline TIMESTAMPTZ`, `status` enum `belum`/`selesai`, `mata_kuliah_id` FK, `created_at`)
+- [x] **DB:** tabel `tugas` (`id`, `judul`, `deskripsi`, `deadline TIMESTAMPTZ`, `status` enum `belum`/`selesai`, `mata_kuliah_id` FK, `created_at`)
 - [ ] **DB:** seed 3 contoh tugas dari guidebook (CS 186, CS 61B, CS 169)
 - [ ] **BE:** CRUD `/api/tugas/:id` + `PATCH /api/tugas/:id/status`
 - [ ] **BE:** `GET /api/tugas` — semua tugas user lintas MK, JOIN nama MK, urut `created_at DESC`

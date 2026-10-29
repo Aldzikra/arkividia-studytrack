@@ -1,4 +1,5 @@
 .env
 frontend/node_modules/
 /dist
-.air.toml
+backend/tmp/
+backend/.air.toml

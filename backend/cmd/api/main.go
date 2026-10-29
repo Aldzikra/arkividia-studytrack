@@ -4,6 +4,7 @@ import (
 	"arkavidia-studytrack/internal/config"
 	"arkavidia-studytrack/internal/database"
 	"arkavidia-studytrack/internal/handlers"
+	"arkavidia-studytrack/internal/middleware"
 	"log"
 	"net/http"
 
@@ -40,6 +41,11 @@ func main() {
 
 	api.POST("/auth/register", handlers.HandleCreateUser(pool))
 	api.POST("/auth/login", handlers.HandleLogin(pool, cfg))
+
+	api.GET("/mata-kuliah", middleware.AuthMiddleware(cfg), handlers.HandleGetAllMatkul(pool))
+	api.POST("/mata-kuliah", middleware.AuthMiddleware(cfg), handlers.HandleCreateMatkul(pool))
+	api.PUT("/mata-kuliah/:id", middleware.AuthMiddleware(cfg))
+	api.DELETE("/mata-kuliah/:id", middleware.AuthMiddleware(cfg))
 
 	log.Println("Server running on port: 8000")
 	router.Run(":" + cfg.Port)

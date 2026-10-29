@@ -3,7 +3,7 @@ CREATE TYPE status_tugas AS ENUM ('belum', 'selesai');
 
 CREATE TABLE IF NOT EXISTS tugas (
     id              SERIAL        PRIMARY KEY,
-    judul           VARCHAR(255)  NOT NULL,
+    judul           VARCHAR(30)  NOT NULL,
     deskripsi       TEXT          NOT NULL DEFAULT '',
     deadline        TIMESTAMPTZ   NOT NULL,              -- simpan UTC, tampilkan WIB di frontend
     status          status_tugas  NOT NULL DEFAULT 'belum',

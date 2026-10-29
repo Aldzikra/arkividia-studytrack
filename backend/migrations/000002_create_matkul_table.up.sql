@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS matkul (
     id          SERIAL       PRIMARY KEY,
-    name        VARCHAR(100) NOT NULL,
-    kode        VARCHAR(20)  NOT NULL,
-    dosen       VARCHAR(100) NOT NULL,
+    name        VARCHAR(25) NOT NULL,
+    kode        VARCHAR(10)  NOT NULL,
+    dosen       VARCHAR(30) NOT NULL,
     user_id     UUID         NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 
     -- kode unik per mahasiswa
