@@ -85,7 +85,7 @@ Tujuan: backend jalan dan terkoneksi ke DB, frontend bisa memanggil API.
 ## Phase 2 — `feature/be-mata-kuliah` (2 Nov)
 
 - [x] **DB:** tabel `mata_kuliah` (`id`, `name`, `kode`, `dosen`, **`user_id` FK**)
-- [ ] **BE:** `GET/POST /api/mata-kuliah`, `PUT/DELETE /api/mata-kuliah/:id` — selalu filter `user_id`
+- [x] **BE:** `GET/POST /api/mata-kuliah`, `PUT/DELETE /api/mata-kuliah/:id` — selalu filter `user_id`
 
 > Asumsi: `user_id` ditambahkan agar data tiap mahasiswa terpisah (dibutuhkan untuk F04).
 
