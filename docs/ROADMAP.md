@@ -108,10 +108,10 @@ Hasil phase ini = setara starter kit (baseline sebelum fitur baru).
 
 Bagian yang dinilai. Kerjakan berurutan DB → BE → test.
 
-- [ ] **DB:** tidak ada kolom baru — kategori dihitung, bukan disimpan (nilainya berubah seiring waktu). Cukup tambah index pada `deadline` (F01)
-- [ ] **BE:** fungsi murni `CategorizeDeadline(deadline, status, now)` → `"mendekati" | "overdue" | "normal"`; `now` di-inject supaya mudah dites (F01, F03)
-- [ ] **BE:** `GET /api/tugas` menambah field `deadline_category` dan mengurutkan: **mendekati** (deadline terdekat dulu) → **overdue** → **normal** (`created_at DESC`) (F02, F04)
-- [ ] **Test:** unit test tabel untuk `CategorizeDeadline` + test urutan endpoint
+- [x] **DB:** tidak ada kolom baru — kategori dihitung, bukan disimpan (nilainya berubah seiring waktu). Cukup tambah index pada `deadline` (F01)
+- [x] **BE:** fungsi murni `CategorizeDeadline(deadline, status, now)` → `"mendekati" | "overdue" | "normal"`; `now` di-inject supaya mudah dites (F01, F03)
+- [x] **BE:** `GET /api/tugas` menambah field `deadline_category` dan mengurutkan: **mendekati** (deadline terdekat dulu) → **overdue** → **normal** (`created_at DESC`) (F02, F04)
+- [x] **Test:** unit test tabel untuk `CategorizeDeadline` + test urutan endpoint
 
 **Logika kategori (pseudocode):**
 ```
@@ -145,8 +145,8 @@ func CategorizeDeadline(deadline, status, now):
 
 ## Phase 5 — `feature/fe-setup-auth` (7–8 Nov)
 
-- [ ] **FE:** struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar (jika belum selesai di Phase 0)
-- [ ] **FE:** halaman Register & Login, simpan token, protected route, logout
+- [x] **FE:** struktur folder, `lib/api.ts` dengan `VITE_API_URL`, layout dasar (jika belum selesai di Phase 0)
+- [x] **FE:** halaman Register & Login, simpan token, protected route, logout
 
 ---
 
