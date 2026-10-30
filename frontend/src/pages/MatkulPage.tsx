@@ -1,7 +1,7 @@
 import { useState, type SubmitEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "../components/Button";
-import { PencilIcon, TrashIcon } from "../components/icons";
+import { ArrowRightIcon, PencilIcon, TrashIcon } from "../components/icons";
 import { Input } from "../components/Input";
 import { getApiError } from "../lib/api";
 import { createMatkul, deleteMatkul, getMatkul, updateMatkul } from "../lib/matkul";
@@ -119,8 +119,8 @@ export function MatkulPage() {
         aria-label="Daftar mata kuliah"
         className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4"
       >
-        {data?.map((m) => (
-          <article key={m.id} className="flex flex-col gap-3.5 rounded-card border border-line bg-surface p-5">
+        {data?.map((m, i) => (
+          <article key={m.id} style={{ animationDelay: `${Math.min(i, 8) * 50}ms` }} className="animate-fade-up flex flex-col gap-3.5 rounded-card border border-line bg-surface p-5">
             <div className="flex items-center justify-between gap-2">
               <span className="rounded-chip bg-brand-50 px-2.5 py-1.25 text-[13px] font-extrabold text-brand-600">
                 {m.kode}
@@ -140,8 +140,13 @@ export function MatkulPage() {
               <h2 className="text-lg font-bold">{m.nama}</h2>
               <span className="text-sm text-muted">{m.dosen}</span>
             </div>
-            <Link to="/" search={{ matkul: m.id }} className="text-sm font-bold">
-              Lihat tugas →
+            <Link
+              to="/"
+              search={{ matkul: m.id }}
+              className="group inline-flex min-h-11 items-center gap-1.5 self-start text-sm font-bold underline underline-offset-4"
+            >
+              Lihat tugas
+              <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
             </Link>
           </article>
         ))}

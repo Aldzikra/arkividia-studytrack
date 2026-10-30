@@ -16,7 +16,7 @@ function Section({ title, tone, items, render }: {
   title: string;
   tone: string;
   items: Tugas[];
-  render: (t: Tugas) => React.ReactNode;
+  render: (t: Tugas, i: number) => React.ReactNode;
 }) {
   if (items.length === 0) return null;
 
@@ -25,7 +25,7 @@ function Section({ title, tone, items, render }: {
       <h2 className={`text-xs font-extrabold tracking-[0.06em] uppercase md:text-sm md:font-bold ${tone}`}>
         {title}
       </h2>
-      {items.map(render)}
+      {items.map((t, i) => render(t, i))}
     </section>
   );
 }
@@ -85,8 +85,8 @@ export function TugasPage() {
   const overdue = list.filter((t) => t.status !== "selesai" && t.deadline_category === "overdue");
   const lainnya = list.filter((t) => !mendekati.includes(t) && !overdue.includes(t));
 
-  const renderCard = (t: Tugas) => (
-    <TaskCard key={t.id} tugas={t} now={now} busy={busyId === t.id} onToggle={toggle} onDelete={remove} />
+  const renderCard = (t: Tugas, i: number) => (
+    <TaskCard key={t.id} index={i} tugas={t} now={now} busy={busyId === t.id} onToggle={toggle} onDelete={remove} />
   );
 
   return (
@@ -143,7 +143,7 @@ export function TugasPage() {
       <Link
         to="/tugas/baru"
         aria-label="Tambah tugas"
-        className="fixed right-5 bottom-24 z-10 flex size-14 items-center justify-center rounded-[18px] bg-brand-600 text-white shadow-[0_8px_20px_rgb(26_95_214/0.35)] hover:bg-brand-700 hover:text-white md:hidden"
+        className="fixed right-5 bottom-24 z-10 flex size-14 items-center justify-center animate-pop rounded-[18px] bg-brand-600 text-white shadow-[0_8px_20px_rgb(26_95_214/0.35)] hover:bg-brand-700 hover:text-white md:hidden"
       >
         <PlusIcon width={24} height={24} />
       </Link>

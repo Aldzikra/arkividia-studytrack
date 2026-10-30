@@ -118,3 +118,12 @@ export function InfoIcon(props: SVGProps<SVGSVGElement>) {
     </Icon>
   );
 }
+
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon strokeWidth="2.4" {...props}>
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
+    </Icon>
+  );
+}

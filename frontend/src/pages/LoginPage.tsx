@@ -34,7 +34,7 @@ export function LoginPage() {
 
   return (
     <AuthShell>
-      <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-4.5 md:flex-none md:gap-5">
+      <form onSubmit={handleSubmit} className="animate-fade-up flex flex-1 flex-col gap-4.5 md:flex-none md:gap-5">
         <div className="flex flex-col gap-1.5 md:gap-2">
           <h1 className="text-[26px] font-extrabold tracking-tight md:text-[30px]">Masuk</h1>
           <p className="text-sm text-muted md:text-[15px]">

@@ -64,7 +64,7 @@ function TugasForm({ editId, initial, matkul }: {
   }
 
   return (
-    <div className="flex max-w-170 flex-col gap-5 md:gap-6">
+    <div className="flex flex-col gap-5 md:gap-6">
       <Link to="/" className="inline-flex min-h-11 items-center self-start text-sm font-bold">
         Kembali ke Daftar Tugas
       </Link>
@@ -74,15 +74,17 @@ function TugasForm({ editId, initial, matkul }: {
       </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-card border border-line bg-surface p-5 md:p-7">
-        <Input label="Judul tugas" placeholder="Lab 4: Query Optimization" maxLength={30} required
-          value={judul} onChange={(e) => setJudul(e.target.value)} />
+        <div className="grid gap-5 md:grid-cols-2">
+          <Input label="Judul tugas" placeholder="Lab 4: Query Optimization" maxLength={30} required
+            value={judul} onChange={(e) => setJudul(e.target.value)} />
 
-        <Select label="Mata kuliah" required value={matkulId} onChange={(e) => setMatkulId(e.target.value)}>
-          <option value="" disabled>Pilih mata kuliah</option>
-          {matkul.map((m) => (
-            <option key={m.id} value={m.id}>{m.kode} · {m.nama}</option>
-          ))}
-        </Select>
+          <Select label="Mata kuliah" required value={matkulId} onChange={(e) => setMatkulId(e.target.value)}>
+            <option value="" disabled>Pilih mata kuliah</option>
+            {matkul.map((m) => (
+              <option key={m.id} value={m.id}>{m.kode} · {m.nama}</option>
+            ))}
+          </Select>
+        </div>
         {matkul.length === 0 && (
           <p className="-mt-3 text-sm text-muted">
             Belum ada mata kuliah. <Link to="/matkul" className="font-bold">Tambah dulu</Link>.

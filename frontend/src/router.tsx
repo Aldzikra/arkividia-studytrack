@@ -1,11 +1,20 @@
-import { createRootRoute, createRoute, createRouter, Outlet, redirect } from "@tanstack/react-router";
-import { AppLayout } from "./components/layout/AppLayout";
-import { LoginPage } from "./pages/LoginPage";
-import { MatkulPage } from "./pages/MatkulPage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { TugasFormPage } from "./pages/TugasFormPage";
-import { TugasPage } from "./pages/TugasPage";
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+  lazyRouteComponent,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 import { useAuthStore } from "./stores/auth.store";
+
+// Tiap halaman jadi chunk terpisah, dimuat saat route dibuka.
+const AppLayout = lazyRouteComponent(() => import("./components/layout/AppLayout"), "AppLayout");
+const LoginPage = lazyRouteComponent(() => import("./pages/LoginPage"), "LoginPage");
+const RegisterPage = lazyRouteComponent(() => import("./pages/RegisterPage"), "RegisterPage");
+const TugasPage = lazyRouteComponent(() => import("./pages/TugasPage"), "TugasPage");
+const TugasFormPage = lazyRouteComponent(() => import("./pages/TugasFormPage"), "TugasFormPage");
+const MatkulPage = lazyRouteComponent(() => import("./pages/MatkulPage"), "MatkulPage");
 
 const rootRoute = createRootRoute({ component: Outlet });
 
@@ -72,7 +81,13 @@ const routeTree = rootRoute.addChildren([
   appRoute.addChildren([tugasRoute, tugasBaruRoute, tugasEditRoute, matkulRoute]),
 ]);
 
-export const router = createRouter({ routeTree });
+export const router = createRouter({
+  routeTree,
+  defaultPendingMs: 200, // jangan kedip untuk muat cepat
+  defaultPendingComponent: () => (
+    <div className="grid min-h-screen place-items-center text-muted">Memuat…</div>
+  ),
+});
 
 declare module "@tanstack/react-router" {
   interface Register {
