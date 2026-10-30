@@ -11,9 +11,9 @@ frontend/   Aplikasi web
 docs/       Roadmap, ERD, desain UI
 ```
 
-## Prasyarat
+## Requirements
 
-| Alat | Versi | Catatan |
+| Tools | Versi | Catatan |
 |---|---|---|
 | Go | 1.27+ | lihat `backend/go.mod` |
 | Node.js + npm | 20+ | |
@@ -21,7 +21,7 @@ docs/       Roadmap, ERD, desain UI
 | [golang-migrate](https://github.com/golang-migrate/migrate) | v4.18 | untuk menjalankan migrasi |
 | `make` | | opsional, hanya pintasan |
 
-Pasang golang-migrate:
+Install golang-migrate:
 
 ```bash
 go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@v4.18.3
@@ -53,11 +53,11 @@ JWT_SECRET=<string acak panjang>
 - `PORT=8000` dipakai agar cocok dengan proxy dev frontend.
 - Buat `JWT_SECRET` dengan: `openssl rand -base64 32`. Jangan pakai nilai contoh.
 
-Jalankan migrasi lalu server:
+Jalankan migrasi dan backend:
 
 ```bash
-make migrate-up     # buat tabel users, matkul, tugas
-make run            # API di http://localhost:8000
+make migrate-up           # buat tabel users, matkul, tugas
+air                       # API di http://localhost:8000
 ```
 
 Tanpa `make`: `migrate -path migrations -database "$DATABASE_URL" up` dan `go run ./cmd/api`.
@@ -88,17 +88,7 @@ psql "$DATABASE_URL" -v email=email-akunmu@example.com -f seeds/tugas.sql
 
 Deadline seed ada di bulan Juli 2026, jadi akan tampil **Terlambat**. Untuk melihat badge **Mendekati**, tambah satu tugas dengan deadline kurang dari 24 jam dari sekarang.
 
-## Perintah berguna
 
-| Lokasi | Perintah | Fungsi |
-|---|---|---|
-| `backend` | `make test` / `go test ./...` | test (kategori deadline) |
-| `backend` | `make vet` | `go vet` |
-| `backend` | `make help` | daftar semua perintah (migrasi, rollback, dll.) |
-| `frontend` | `npm run build` | build produksi + type check |
-| `frontend` | `npm run lint` | ESLint |
-
-> `npm run lint` butuh `typescript-eslint` yang mendukung versi TypeScript terpasang. Kalau lint error "does not support TS 7.0", turunkan `typescript` ke 6.x.
 
 ## Endpoint API
 
