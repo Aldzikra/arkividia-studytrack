@@ -11,4 +11,7 @@ type Tugas struct {
 	MataKuliahId int       `json:"matkul_id" db:"mata_kuliah_id" binding:"required"`
 	MatkulNama   string    `json:"matkul_nama" db:"-"`
 	CreatedAt    time.Time `json:"created_at" db:"created_at"`
+
+	// Fitur Categorize Deadline
+	DeadlineCategory string `json:"deadline_category,omitempty" db:"-"`
 }

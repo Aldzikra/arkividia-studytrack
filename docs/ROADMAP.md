@@ -98,7 +98,7 @@ Hasil phase ini = setara starter kit (baseline sebelum fitur baru).
 - [x] **DB:** tabel `tugas` (`id`, `judul`, `deskripsi`, `deadline TIMESTAMPTZ`, `status` enum `belum`/`selesai`, `mata_kuliah_id` FK, `created_at`)
 - [x] **DB:** seed 3 contoh tugas dari guidebook (CS 186, CS 61B, CS 169)
 - [x] **BE:** CRUD `/api/tugas/:id` + `PATCH /api/tugas/:id/status`
-- [ ] **BE:** `GET /api/tugas` — semua tugas user lintas MK, JOIN nama MK, urut `created_at DESC`
+- [x] **BE:** `GET /api/tugas` — semua tugas user lintas MK, JOIN nama MK, urut `created_at DESC`
 
 > Simpan `deadline` sebagai `TIMESTAMPTZ` (UTC) agar perhitungan "< 24 jam" tidak kacau karena zona waktu; tampilkan dalam WIB di frontend.
 
