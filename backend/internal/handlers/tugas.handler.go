@@ -3,10 +3,12 @@ package handlers
 import (
 	"arkavidia-studytrack/internal/models"
 	"arkavidia-studytrack/internal/repository"
+	"arkavidia-studytrack/internal/services"
 	"errors"
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
@@ -49,6 +51,8 @@ func HandleGetAllTugas(pool *pgxpool.Pool) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch assignment"})
 			return
 		}
+
+		services.SortTugas(tugas, time.Now())
 
 		c.JSON(http.StatusOK, tugas)
 	}

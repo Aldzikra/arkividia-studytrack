@@ -47,11 +47,11 @@ func SortTugas(list []models.Tugas, now time.Time) {
 	sort.SliceStable(list, func(i, j int) bool {
 		ri, rj := CategoryRank(list[i].DeadlineCategory), CategoryRank(list[j].DeadlineCategory)
 		if ri != rj {
-			return ri < rj 
+			return ri < rj
 		}
 		if ri == 0 {
-			return list[i].Deadline.Before(list[j].Deadline) // grup mendekati: deadline terdekat dulu
+			return list[i].Deadline.Before(list[j].Deadline)
 		}
-		return false // grup lain: urutan dari DB (created_at DESC) dipertahankan
+		return false
 	})
 }

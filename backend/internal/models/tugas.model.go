@@ -13,5 +13,5 @@ type Tugas struct {
 	CreatedAt    time.Time `json:"created_at" db:"created_at"`
 
 	// Fitur Categorize Deadline
-	DeadlineCategory string `json:"deadline_category" db:"-"`
+	DeadlineCategory string `json:"deadline_category,omitempty" db:"-"`
 }
