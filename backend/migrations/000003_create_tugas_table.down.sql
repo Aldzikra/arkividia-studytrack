@@ -1,2 +1,0 @@
-DROP TABLE IF EXISTS tugas;
-DROP TYPE IF EXISTS status_tugas;
