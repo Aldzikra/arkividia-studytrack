@@ -74,10 +74,70 @@ func HandleGetTugasById(pool *pgxpool.Pool) gin.HandlerFunc {
 		if err != nil {
 			log.Println("get tugas by id: ", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch assignment"})
-			return 
+			return
 		}
 
 		c.JSON(http.StatusOK, tugas)
 	}
 }
 
+func HandleUpdateTugas(pool *pgxpool.Pool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+			return
+		}
+
+		var tugas models.Tugas
+		if err := c.ShouldBindJSON(&tugas); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid format"})
+			return
+		}
+
+		tugas.Id = id
+
+		updated, err := repository.UpdateTugas(pool, c.GetString("user_id"), &tugas)
+		if err != nil {
+			var pgErr *pgconn.PgError
+			switch {
+			case errors.Is(err, pgx.ErrNoRows):
+				c.JSON(http.StatusNotFound, gin.H{"error": "Course not found"})
+			case errors.As(err, &pgErr) && pgErr.Code == "23505":
+				c.JSON(http.StatusConflict, gin.H{"error": "Course code already exists"})
+			default:
+				log.Println("update tugas:", err)
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update Course"})
+			}
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Course updated successfully",
+			"data":    updated,
+		})
+	}
+}
+
+func HandleDeleteTugas(pool *pgxpool.Pool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+			return
+		}
+
+		deleted, err := repository.DeleteMatkul(pool, c.GetString("user_id"), id)
+		if err != nil {
+			log.Println("delete matkul:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete Course"})
+			return
+		}
+		if !deleted {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Course not found"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"message": "Course deleted successfully"})
+	}
+}
