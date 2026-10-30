@@ -81,7 +81,7 @@ export function MatkulPage() {
             value={form.kode} onChange={set("kode")} />
         </div>
         <div className="min-w-0 flex-[3_1_200px]">
-          <Input label="Nama mata kuliah" placeholder="Database Systems" maxLength={25} required
+          <Input label="Nama mata kuliah" placeholder="Database Systems" maxLength={50} required
             value={form.nama} onChange={set("nama")} />
         </div>
         <div className="min-w-0 flex-[2_1_180px]">
