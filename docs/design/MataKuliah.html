@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>StudyTrack — Mata Kuliah</title>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F7FD}
+a{color:#1A5FD6}a:hover{color:#123F8F}
+button,input{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #0F1B33; background: #F4F7FD;">
+
+  <nav aria-label="Navigasi utama" style="flex: 1 1 240px; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #DCE5F5; padding: 28px 20px; display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #2373F4; display: flex; align-items: center; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h12v15H6a2 2 0 0 0-2 2"></path><path d="M9 9l2 2 4-4"></path></svg>
+      </div>
+      <span style="font-size: 19px; font-weight: 800; letter-spacing: -0.02em;">StudyTrack</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 10px; color: #3B4863; font-weight: 600; font-size: 15px; text-decoration: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"></path><path d="M4 6h.01M4 12h.01M4 18h.01"></path></svg>
+        Daftar Tugas
+      </a>
+      <a href="MataKuliah.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 10px; background: #E8F0FE; color: #1A5FD6; font-weight: 700; font-size: 15px; text-decoration: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7l10-4 10 4-10 4z"></path><path d="M6 9v5c0 1.7 2.7 3 6 3s6-1.3 6-3V9"></path></svg>
+        Mata Kuliah
+      </a>
+    </div>
+    <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: #F4F7FD;">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: #65D0F4; color: #0B3A4A; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center;">AZ</div>
+      <div style="display: flex; flex-direction: column; min-width: 0; flex-grow: 1;">
+        <span style="font-size: 14px; font-weight: 700;">aldzikra</span>
+        <span style="font-size: 12px; color: #55627A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">[email@kampus.ac.id]</span>
+      </div>
+      <a href="Login.dc.html" aria-label="Keluar" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #55627A; border-radius: 10px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 17l-5-5 5-5"></path><path d="M5 12h11"></path></svg>
+      </a>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 36px 40px 56px;">
+    <div style="max-width: 920px; width: 100%; display: flex; flex-direction: column; gap: 28px;">
+
+      <header style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 13px; font-weight: 600; color: #55627A;">Semester berjalan</span>
+        <h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.02em;">Mata Kuliah</h1>
+      </header>
+
+      <form aria-label="Tambah mata kuliah" style="background: #FFFFFF; border: 1px solid #DCE5F5; border-radius: 16px; padding: 20px 22px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px;">
+        <label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #3B4863;">
+          Kode
+          <input type="text" placeholder="CS 186" style="min-height: 44px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid #C4D2EC; font-size: 15px; color: #0F1B33; background: #FFFFFF;">
+        </label>
+        <label style="flex: 3 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #3B4863;">
+          Nama mata kuliah
+          <input type="text" placeholder="Database Systems" style="min-height: 44px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid #C4D2EC; font-size: 15px; color: #0F1B33; background: #FFFFFF;">
+        </label>
+        <label style="flex: 2 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #3B4863;">
+          Dosen pengampu
+          <input type="text" placeholder="Nama dosen" style="min-height: 44px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid #C4D2EC; font-size: 15px; color: #0F1B33; background: #FFFFFF;">
+        </label>
+        <button type="submit" style="min-height: 44px; padding: 0 20px; border-radius: 12px; border: none; background: #1A5FD6; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer;">Tambah</button>
+      </form>
+
+      <section aria-label="Daftar mata kuliah" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
+        <article style="background: #FFFFFF; border: 1px solid #DCE5F5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <span style="padding: 5px 10px; border-radius: 8px; background: #E8F0FE; color: #1A5FD6; font-size: 13px; font-weight: 800;">CS 186</span>
+            <div style="display: flex; gap: 4px;">
+              <button type="button" aria-label="Ubah CS 186" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button>
+              <button type="button" aria-label="Hapus CS 186" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Database Systems</h2>
+            <span style="font-size: 14px; color: #55627A;">[Nama dosen]</span>
+          </div>
+          <a href="Main.dc.html" style="font-size: 14px; font-weight: 700; text-decoration: none;">Lihat tugas →</a>
+        </article>
+
+        <article style="background: #FFFFFF; border: 1px solid #DCE5F5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <span style="padding: 5px 10px; border-radius: 8px; background: #E8F0FE; color: #1A5FD6; font-size: 13px; font-weight: 800;">CS 61B</span>
+            <div style="display: flex; gap: 4px;">
+              <button type="button" aria-label="Ubah CS 61B" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button>
+              <button type="button" aria-label="Hapus CS 61B" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Data Structures</h2>
+            <span style="font-size: 14px; color: #55627A;">[Nama dosen]</span>
+          </div>
+          <a href="Main.dc.html" style="font-size: 14px; font-weight: 700; text-decoration: none;">Lihat tugas →</a>
+        </article>
+
+        <article style="background: #FFFFFF; border: 1px solid #DCE5F5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <span style="padding: 5px 10px; border-radius: 8px; background: #E8F0FE; color: #1A5FD6; font-size: 13px; font-weight: 800;">CS 169</span>
+            <div style="display: flex; gap: 4px;">
+              <button type="button" aria-label="Ubah CS 169" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button>
+              <button type="button" aria-label="Hapus CS 169" style="width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; color: #55627A; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></button>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 700;">Software Engineering</h2>
+            <span style="font-size: 14px; color: #55627A;">[Nama dosen]</span>
+          </div>
+          <a href="Main.dc.html" style="font-size: 14px; font-weight: 700; text-decoration: none;">Lihat tugas →</a>
+        </article>
+      </section>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":760}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
