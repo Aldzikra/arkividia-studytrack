@@ -3,6 +3,7 @@ import { AppLayout } from "./components/layout/AppLayout";
 import { LoginPage } from "./pages/LoginPage";
 import { MatkulPage } from "./pages/MatkulPage";
 import { RegisterPage } from "./pages/RegisterPage";
+import { TugasFormPage } from "./pages/TugasFormPage";
 import { TugasPage } from "./pages/TugasPage";
 import { useAuthStore } from "./stores/auth.store";
 
@@ -39,7 +40,26 @@ const appRoute = createRoute({
   component: AppLayout,
 });
 
-const tugasRoute = createRoute({ getParentRoute: () => appRoute, path: "/", component: TugasPage });
+const tugasRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "/",
+  // ?matkul=<id> dipakai tautan "Lihat tugas" di halaman Mata Kuliah.
+  validateSearch: (search: Record<string, unknown>): { matkul?: number } => {
+    const id = Number(search.matkul);
+    return Number.isInteger(id) && id > 0 ? { matkul: id } : {};
+  },
+  component: TugasPage,
+});
+const tugasBaruRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "/tugas/baru",
+  component: TugasFormPage,
+});
+const tugasEditRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "/tugas/$id/edit",
+  component: TugasFormPage,
+});
 const matkulRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/matkul",
@@ -49,7 +69,7 @@ const matkulRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   loginRoute,
   registerRoute,
-  appRoute.addChildren([tugasRoute, matkulRoute]),
+  appRoute.addChildren([tugasRoute, tugasBaruRoute, tugasEditRoute, matkulRoute]),
 ]);
 
 export const router = createRouter({ routeTree });
