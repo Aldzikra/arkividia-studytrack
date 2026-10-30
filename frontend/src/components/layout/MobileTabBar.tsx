@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { CapIcon, ListIcon, LogoutIcon } from "../icons";
-import { useLogout } from "./useLogout";
+import { CapIcon, ListIcon } from "../icons";
 
 const itemClass =
   "flex min-h-13 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-[12px] text-xs font-bold text-muted hover:text-muted";
@@ -17,12 +16,10 @@ function Pill({ active, children }: { active?: boolean; children: ReactNode }) {
 
 // Mobile (< 768px).
 export function MobileTabBar() {
-  const logout = useLogout();
-
   return (
     <nav
       aria-label="Navigasi utama"
-      className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-3 gap-1 border-t border-line bg-surface px-3 pt-2 pb-5 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-2 gap-1 border-t border-line bg-surface px-3 pt-2 pb-5 md:hidden"
     >
       <Link
         to="/"
@@ -53,12 +50,6 @@ export function MobileTabBar() {
           </>
         )}
       </Link>
-      <button type="button" onClick={logout} className={itemClass}>
-        <Pill>
-          <LogoutIcon width={20} height={20} />
-        </Pill>
-        Keluar
-      </button>
     </nav>
   );
 }

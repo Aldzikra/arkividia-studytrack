@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { Button } from "../components/Button";
 import { PlusIcon } from "../components/icons";
@@ -16,7 +17,7 @@ function Section({ title, tone, items, render }: {
   title: string;
   tone: string;
   items: Tugas[];
-  render: (t: Tugas) => React.ReactNode;
+  render: (t: Tugas, i: number) => React.ReactNode;
 }) {
   if (items.length === 0) return null;
 
@@ -25,7 +26,7 @@ function Section({ title, tone, items, render }: {
       <h2 className={`text-xs font-extrabold tracking-[0.06em] uppercase md:text-sm md:font-bold ${tone}`}>
         {title}
       </h2>
-      {items.map(render)}
+      {items.map((t, i) => render(t, i))}
     </section>
   );
 }
@@ -85,8 +86,8 @@ export function TugasPage() {
   const overdue = list.filter((t) => t.status !== "selesai" && t.deadline_category === "overdue");
   const lainnya = list.filter((t) => !mendekati.includes(t) && !overdue.includes(t));
 
-  const renderCard = (t: Tugas) => (
-    <TaskCard key={t.id} tugas={t} now={now} busy={busyId === t.id} onToggle={toggle} onDelete={remove} />
+  const renderCard = (t: Tugas, i: number) => (
+    <TaskCard key={t.id} index={i} tugas={t} now={now} busy={busyId === t.id} onToggle={toggle} onDelete={remove} />
   );
 
   return (
@@ -131,22 +132,32 @@ export function TugasPage() {
       {!data && !error && <p className="text-muted">Memuat tugas…</p>}
 
       {data && list.length === 0 && (
-        <p className="rounded-card border border-line bg-surface p-6 text-center text-muted">
-          Belum ada tugas. Tambahkan tugas pertamamu.
-        </p>
+        <div className="flex flex-col items-center gap-4 rounded-card border border-line bg-surface p-6 text-center">
+          <p className="text-muted">Belum ada tugas. Tambahkan tugas pertamamu.</p>
+          <Link to="/tugas/baru" className="md:hidden">
+            <Button className="gap-2">
+              <PlusIcon /> Tambah Tugas
+            </Button>
+          </Link>
+        </div>
       )}
 
       <Section title="Mendekati deadline · kurang dari 24 jam" tone="text-mendekati-fg" items={mendekati} render={renderCard} />
       <Section title="Terlambat" tone="text-overdue-fg" items={overdue} render={renderCard} />
       <Section title="Tugas lainnya · terbaru di atas" tone="text-text-2" items={lainnya} render={renderCard} />
 
-      <Link
-        to="/tugas/baru"
-        aria-label="Tambah tugas"
-        className="fixed right-5 bottom-24 z-10 flex size-14 items-center justify-center rounded-[18px] bg-brand-600 text-white shadow-[0_8px_20px_rgb(26_95_214/0.35)] hover:bg-brand-700 hover:text-white md:hidden"
-      >
-        <PlusIcon width={24} height={24} />
-      </Link>
+      {/* Portal: `fixed` tidak boleh di dalam pembungkus beranimasi (transform) */}
+      {list.length > 0 &&
+        createPortal(
+        <Link
+          to="/tugas/baru"
+          aria-label="Tambah tugas"
+          className="fixed right-5 bottom-24 z-10 flex size-14 animate-pop items-center justify-center rounded-[18px] bg-brand-600 text-white shadow-[0_8px_20px_rgb(26_95_214/0.35)] hover:bg-brand-700 hover:text-white md:hidden"
+        >
+          <PlusIcon width={24} height={24} />
+        </Link>,
+        document.body,
+        )}
     </div>
   );
 }

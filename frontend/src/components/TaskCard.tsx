@@ -9,12 +9,13 @@ interface TaskCardProps {
   tugas: Tugas;
   now: Date;
   busy?: boolean;
+  index?: number;
   onToggle: (tugas: Tugas) => void;
   onDelete: (tugas: Tugas) => void;
 }
 
 // Kategori datang dari backend (deadline_category); di sini hanya dipetakan ke tampilan.
-export function TaskCard({ tugas, now, busy, onToggle, onDelete }: TaskCardProps) {
+export function TaskCard({ tugas, now, busy, index = 0, onToggle, onDelete }: TaskCardProps) {
   const selesai = tugas.status === "selesai";
   const category = selesai ? "normal" : (tugas.deadline_category ?? "normal");
   const mendekati = category === "mendekati";
@@ -37,7 +38,8 @@ export function TaskCard({ tugas, now, busy, onToggle, onDelete }: TaskCardProps
 
   return (
     <article
-      className={`flex flex-wrap items-center gap-3 rounded-card p-4 md:gap-4 md:px-5.5 md:py-5 ${box}`}
+      style={{ animationDelay: `${Math.min(index, 8) * 50}ms` }}
+      className={`animate-fade-up flex flex-wrap items-center gap-3 rounded-card p-4 md:gap-4 md:px-5.5 md:py-5 ${box}`}
     >
       <div className="flex min-w-0 flex-[1_1_240px] flex-col gap-2 md:basis-90">
         <div className="flex flex-wrap items-center gap-1.5 md:gap-2">
