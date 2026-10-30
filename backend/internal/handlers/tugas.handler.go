@@ -6,8 +6,10 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -40,3 +42,42 @@ func HandleCreateTugas(pool *pgxpool.Pool) gin.HandlerFunc {
 		})
 	}
 }
+
+func HandleGetAllTugas(pool *pgxpool.Pool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		tugas, err := repository.GetAllTugas(pool, c.GetString("user_id"))
+
+		if err != nil {
+			log.Println("get tugas: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch assignment"})
+			return
+		}
+
+		c.JSON(http.StatusOK, tugas)
+	}
+}
+
+func HandleGetTugasById(pool *pgxpool.Pool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id"})
+			return
+		}
+
+		tugas, err := repository.GetTugasByID(pool, id, c.GetString("user_id"))
+		if errors.Is(err, pgx.ErrNoRows) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Assignment not found"})
+			return
+		}
+
+		if err != nil {
+			log.Println("get tugas by id: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch assignment"})
+			return 
+		}
+
+		c.JSON(http.StatusOK, tugas)
+	}
+}
+
