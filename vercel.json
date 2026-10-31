@@ -1,7 +1,7 @@
 {
   "services": {
     "frontend": { "root": "frontend/" },
-    "backend": { "root": "backend/", "runtime": "container" }
+    "backend": { "root": "backend/" }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": { "service": "backend" } },
